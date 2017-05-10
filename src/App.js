@@ -8,29 +8,38 @@ class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
+      data: [],
       nowPlaying : ''
     };
   }
   componentDidMount () {
-    axios.get('http://phish.in/api/v1/eras')
+    axios.get('http://phish.in/api/v1/years')
       .then(resp => {
-        console.log(resp.data.data);
-        this.setState({
-          data: resp
-        })
+        let { data } = resp.data;
+        this.setState({ data });
       });
   }
   render() {
+    console.log(this.state.data)
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <EraList />
+        <nav className="">
+          {this.state.data.map((year, i) =>
+            <button key={i}>{year}</button>
+          )}
+        </nav>
+
+        <div className="NowPlaying">
+          <p>song name</p>
+          <p>date - venue</p>
+          <p>time elapsed / time remaining</p>
+        </div>
+
+        {/* <EraList /> */}
       </div>
     );
   }

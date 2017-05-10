@@ -20,7 +20,6 @@ class EraList extends Component {
 
   render() {
     let eras = [];
-    console.log(this.state.erasData)
     for (let era in this.state.erasData) {
       eras.push(era);
     }
@@ -33,8 +32,8 @@ class EraList extends Component {
         {eras.map(era =>
           <div>
           <h3>{era}</h3>
-            {this.state.erasData[era].map(yearData =>
-              <Year id={yearData} />
+            {this.state.erasData[era].map((yearData, i) =>
+              <Year id={yearData} key={i} />
             )}
         </div>
         )}
